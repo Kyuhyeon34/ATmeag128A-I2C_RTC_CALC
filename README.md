@@ -22,11 +22,11 @@
 ## 2. H/W: 외관 사진 및 시스템 회로도
 
 ### 📸 외관 사진
-![외관 사진]<img width="620" height="827" alt="image" src="https://github.com/user-attachments/assets/3385ccdb-8cfe-4729-ad70-a75a9929cd7d" />
+<img width="620" height="827" alt="image" src="https://github.com/user-attachments/assets/3385ccdb-8cfe-4729-ad70-a75a9929cd7d" />
 
 
 ### 🔌 시스템 회로도
-![시스템 회로도]<img width="1165" height="807" alt="image" src="https://github.com/user-attachments/assets/d7de1420-1735-476f-b86d-7ab18be46973" />
+<img width="1165" height="807" alt="image" src="https://github.com/user-attachments/assets/d7de1420-1735-476f-b86d-7ab18be46973" />
 
 
 ### 📋 2.1 PART LIST
@@ -44,7 +44,7 @@
 ## 3. S/W 구현 및 분석
 
 ### 🔄 3.1 전체 FSM (Finite State Machine)
-![전체 FSM]<img width="1294" height="808" alt="image" src="https://github.com/user-attachments/assets/d6080207-07e7-459b-a6dc-c0259f448b49" />
+<img width="1294" height="808" alt="image" src="https://github.com/user-attachments/assets/d6080207-07e7-459b-a6dc-c0259f448b49" />
 
 
 ---
@@ -56,18 +56,18 @@
 * **Input High:** 0.7 Vcc min. / **Input Low:** 0.55V max.
 * **E-Cycle Time:** 1000ns min. / **E-Pulse Width:** 450ns min.
 * **주요 명령어 (Instruction):**
-  * `0x01`: Clear Display (1.64ms 대기)
-  * `0x06`: Entry Mode (Cursor Auto Inc)
-  * `0x28`: Function Set (4-bit, 2-line)
-  * `0x0C`: Display ON (Cursor OFF)
-  * `0x02`: Cursor Return (1.64ms 대기)
+  * 0x01 : Clear Display (1.64ms 대기)
+  * 0x06 : Entry Mode (Cursor Auto Inc)
+  * 0x28 : Function Set (4-bit, 2-line)
+  * 0x0C : Display ON (Cursor OFF)
+  * 0x02 : Cursor Return (1.64ms 대기)
 
 #### ⚙️ 제어 및 구조적 사양
 * **레지스터 선택 (RS 핀)**
-  * `RS = 0`: Instruction Register (화면 초기화, 입력 설정 등 명령용)
-  * `RS = 1`: Data Register (화면에 문자를 직접 표출하기 위한 아스크 코드 저장)
+  * RS = 0 : Instruction Register (화면 초기화, 입력 설정 등 명령용)
+  * RS = 1 : Data Register (화면에 문자를 직접 표출하기 위한 아스크 코드 저장)
 * **내부 메모리 아키텍처**
-  * **DDRAM (Display RAM):** 문자 코드 저장 영역. 1행은 `0x00`, 2행은 `0x40` 주소 할당
+  * **DDRAM (Display RAM):** 문자 코드 저장 영역. 1행은 0x00, 2행은 0x40 주소 할당
   * **CGROM & CGRAM:** 기본 폰트용 CGROM 및 사용자 커스텀 폰트 구현용 CGRAM
 * **동기 제어 타이밍 (E 핀)**
   * **Enable (E) 트리거:** 데이터를 버스에 로드한 후 E 핀을 Pulse 형태로 제어
@@ -75,12 +75,12 @@
 
 #### 🔄 LCD 초기화 시퀀스 상세 (4-bit)
 1. **STEP 1 (Power On):** Wait 40ms (VCC 안정화)
-2. **STEP 2 (8-bit Reset):** `0x30` 전송 (3회) (각각 4.1ms / 100us 대기)
-3. **STEP 3 (4-bit Conv):** `0x20` 전송 (4비트 모드 진입)
-4. **STEP 4 (Function Set):** 4-bit `0x28` 전송 (4-bit, 2-Line, 16-Chars)
+2. **STEP 2 (8-bit Reset):** 0x30 전송 (3회) (각각 4.1ms / 100us 대기)
+3. **STEP 3 (4-bit Conv):** 0x20 전송 (4비트 모드 진입)
+4. **STEP 4 (Function Set):** 4-bit 0x28 전송 (4-bit, 2-Line, 16-Chars)
 5. **STEP 5 (Final Set):** Disp ON / Clear / Entry Mode 설정
 
-> 💡 **상세 분석:** 부팅 초기 LCD는 8비트 모드인지 4비트 모드인지 알 수 없는 상태일 수 있습니다. 따라서 `0x30`을 세 번 전송하는 "Software Reset" 과정을 통해 어떤 명령 상태에 있더라도 강제로 8비트 모드로 동기화시킨 후 4비트로 전환하는 것이 신뢰성 확보의 핵심입니다.
+> 💡 **상세 분석:** 부팅 초기 LCD는 8비트 모드인지 4비트 모드인지 알 수 없는 상태일 수 있습니다. 따라서 0x30을 세 번 전송하는 "Software Reset" 과정을 통해 어떤 명령 상태에 있더라도 강제로 8비트 모드로 동기화시킨 후 4비트로 전환하는 것이 신뢰성 확보의 핵심입니다.
 
 ---
 
@@ -88,7 +88,7 @@
 
 #### 📌 Spec Summary
 * **Interface:** 2-Wire Serial (I2C)
-* **Slave Addr:** `0x68` (1101000)
+* **Slave Addr:** 0x68 (1101000)
 * **BCD Format:** 모든 시간 데이터는 BCD 코드로 관리
 * **Battery Backup:** 전원 차단 시 배터리 자동 전환
 * *⚠️ 주의: 00h 레지스터의 CH(Clock Halt) 비트가 1이면 시간이 흐르지 않으므로 초기화 시 반드시 0으로 클리어해야 함.*
@@ -103,21 +103,21 @@
 
 #### 📡 RTC I2C 통신 동작 시나리오
 * **[ Write 시나리오 ]**
-  `START` ➡️ `ADDRESS (Slave Addr 0x68 + Write Bit 0)` ➡️ `ACK (Slave Low)` ➡️ `Data (Master: Decimal -> BCD)` ➡️ `ACK (Slave Low)` ➡️ `STOP`
+  START ➡️ ADDRESS (Slave Addr 0x68 + Write Bit 0) ➡️ ACK (Slave Low) ➡️ Data (Master: Decimal -> BCD) ➡️ ACK (Slave Low) ➡️ STOP
 * **[ Read 시나리오 ]**
-  `START` ➡️ `ADDRESS (Slave Addr 0x68 + Read Bit 1)` ➡️ `ACK (Slave Low)` ➡️ `Data (Slave: BCD -> Decimal)` ➡️ `NACK (Master High)` ➡️ `STOP`
+  START ➡️ ADDRESS (Slave Addr 0x68 + Read Bit 1) ➡️ ACK (Slave Low) ➡️ Data (Slave: BCD -> Decimal) ➡️ NACK (Master High) ➡️ STOP
 
 #### 🔬 오실로스코프 파형 분석
 * **시작 주소 지정:** <img width="852" height="710" alt="image" src="https://github.com/user-attachments/assets/84c64f02-13b6-49af-a834-cd83f544cef5" />
-`START` ➡️ `0x68 (addr) + WRITE` ➡️ `ACK` ➡️ `0x00` ➡️ `ACK` ➡️ `STOP`
+START ➡️ 0x68 (addr) + WRITE ➡️ ACK ➡️ 0x00 ➡️ ACK ➡️ STOP
 * **READ 시작:** <img width="853" height="710" alt="image" src="https://github.com/user-attachments/assets/fcb0b827-f567-4e7c-99cc-23a3d3e8f69d" />
-`START` ➡️ `0x68 (addr) + READ` ➡️ `ACK` ➡️ `0x54 (second)`
+START ➡️ 0x68 (addr) + READ ➡️ ACK ➡️ 0x54 (second)
 <img width="790" height="732" alt="image" src="https://github.com/user-attachments/assets/db21b128-e6fa-4758-afea-284d93d28c23" />
-➡️ `ACK` ➡️ `0x49 (minutes)` ➡️ `ACK` ➡️ `0x12 (hours)`
+➡️ ACK ➡️ 0x49 (minutes) ➡️ ACK ➡️ 0x12 (hours)
 <img width="869" height="716" alt="image" src="https://github.com/user-attachments/assets/5f9a04e7-ce73-44ca-b814-3abb78ac7aff" />
-➡️ `ACK` ➡️ `0x02 (day)` ➡️ `ACK` ➡️ `0x02 (date)` ➡️ `ACK`
+➡️ ACK ➡️ 0x02 (day) ➡️ ACK ➡️ 0x02 (date) ➡️ ACK
 <img width="851" height="708" alt="image" src="https://github.com/user-attachments/assets/b2a93ae4-0e4a-4017-a2f7-a7027895a676" />
-➡️ `0x07 (month)` ➡️ `ACK` ➡️ `0x26 (year)` ➡️ `NACK` ➡️ `STOP`
+➡️ 0x07 (month) ➡️ ACK ➡️ 0x26 (year) ➡️ NACK ➡️ STOP
 <img width="844" height="688" alt="image" src="https://github.com/user-attachments/assets/a323a3b6-c81a-49d6-b270-8bcddaf38fdf" />
 
 ---
@@ -128,10 +128,10 @@
 
 #### 📌 후위 표기법 (Postfix) 변환 및 연산
 * 복합 수식의 연산자 우선순위 해결을 위해 중위 표기법(Infix)을 후위 표기법으로 변환하여 계산합니다.
-* **예시:** `3 + 4 * 2` (Infix) ➡️ `3 4 2 * +` (Postfix)
+* **예시:** 3 + 4 * 2 (Infix) ➡️ 3 4 2 * + (Postfix)
 
 #### ⚙️ 구현 메커니즘
-* **STACK:** 연산자(`+`, `-`, `*`, `/`) 및 괄호의 우선순위 관리
+* **STACK:** 연산자( +, -, *, / ) 및 괄호의 우선순위 관리
 * **QUEUE:** 변환된 수식의 토큰을 순서대로 저장
 * **Algorithm:** 피연산자는 큐(Queue)로 직행하고, 연산자는 스택(Stack) 최상단 원소와 우선순위를 비교하여 Pop/Push를 수행합니다.
 
