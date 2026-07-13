@@ -148,14 +148,14 @@ START ➡️ 0x68 (addr) + READ ➡️ ACK ➡️ 0x54 (second)
 [[Reset 동작]](https://github.com/user-attachments/assets/9201ae2a-b272-4af6-81cc-fa5492c17b1b)
 
 
-https://github.com/user-attachments/assets/16aa15ed-f6f5-4f53-aef4-6619253aef0c
-계산기 대기 동작
+[[계산기 대기 동작]](https://github.com/user-attachments/assets/16aa15ed-f6f5-4f53-aef4-6619253aef0c)
 
-https://github.com/user-attachments/assets/3c961f86-75e2-441f-8e36-236fd8bb8af0
-계산기 Shift 동작
 
-https://github.com/user-attachments/assets/b943fc2d-21e4-4a6d-8d8f-e8051909b757
-전체 동작
+[[계산기 Shift 동작]](https://github.com/user-attachments/assets/3c961f86-75e2-441f-8e36-236fd8bb8af0)
+
+
+[[전체 동작]](https://github.com/user-attachments/assets/b943fc2d-21e4-4a6d-8d8f-e8051909b757)
+
 
 ---
 
