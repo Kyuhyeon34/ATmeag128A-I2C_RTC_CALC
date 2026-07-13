@@ -145,8 +145,8 @@ START ➡️ 0x68 (addr) + READ ➡️ ACK ➡️ 0x54 (second)
 
 ## 5. 동작 영상
 
-https://github.com/user-attachments/assets/9201ae2a-b272-4af6-81cc-fa5492c17b1b
-Reset 동작
+![Reset 동작](https://github.com/user-attachments/assets/9201ae2a-b272-4af6-81cc-fa5492c17b1b)
+
 
 https://github.com/user-attachments/assets/16aa15ed-f6f5-4f53-aef4-6619253aef0c
 계산기 대기 동작
