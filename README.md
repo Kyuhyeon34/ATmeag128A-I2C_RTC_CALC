@@ -143,7 +143,23 @@ START ➡️ 0x68 (addr) + READ ➡️ ACK ➡️ 0x54 (second)
 
 ---
 
-## 📝 5. 구현 후기
+## 5. 동작 영상
+
+https://github.com/user-attachments/assets/9201ae2a-b272-4af6-81cc-fa5492c17b1b
+Reset 동작
+
+https://github.com/user-attachments/assets/16aa15ed-f6f5-4f53-aef4-6619253aef0c
+계산기 대기 동작
+
+https://github.com/user-attachments/assets/3c961f86-75e2-441f-8e36-236fd8bb8af0
+계산기 Shift 동작
+
+https://github.com/user-attachments/assets/b943fc2d-21e4-4a6d-8d8f-e8051909b757
+전체 동작
+
+---
+
+## 📝 6. 구현 후기
 
 * **[LCD 하드웨어 시프트]** 명령어의 물리적 실행 시간(1.64ms) 제약을 고려하여 4비트 인터페이스의 타이밍 동기화를 정밀하게 제어함으로써, 긴 수식 입력 시 화면이 부드럽게 밀리는 하드웨어 스크롤 기능을 성공적으로 구현했습니다.
 * **[오버플로우 방지]** 정수 범위 한계를 극복하기 위해 문자열 변환 버퍼 함수로 제어하여 큰 자릿수도 깨짐없이 정상 계산되도록 완성했습니다.
