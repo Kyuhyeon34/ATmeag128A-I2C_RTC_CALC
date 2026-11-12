@@ -1,6 +1,38 @@
-# EMBEDDED SYSTEM PROJECT
-## RTC 시계 및 복합 계산기 시스템 개발
-### Data Sheet 해석 및 I2C 통신 기반 시스템 통합
+# ATmega128A RTC 시계 · 복합 계산기
+
+> 데이터시트 해석과 I2C 통신 기반 시스템 통합 · AVR 2인 팀 프로젝트
+
+| | |
+|---|---|
+| 📅 **기간 · 인원** | 2026.07 · 2인 팀 (김호철 · 이규현) |
+| 🛠️ **사용 기술** | C · ATmega128A · I2C(TWI) · DS1307 RTC · LCD1602 4-bit · 4x4 키패드 · Timer0 · 오실로스코프 |
+| 📈 **결과** | DS1307 시간 읽기 · 설정을 오실로스코프로 바이트 단위 검증, 괄호 · 사칙연산 우선순위를 처리하는 계산기와 LCD 하드웨어 스크롤 구현 |
+
+DS1307 RTC에서 시간을 I2C로 읽어 LCD에 표시하고, 버튼으로 시간 설정 모드와 계산기 모드를 오가는 시스템입니다.
+계산기는 키패드로 입력한 수식을 우선순위에 맞게 계산하고, 긴 수식은 LCD 하드웨어 시프트로 밀어 보여 줍니다.
+
+📑 [발표자료 (PDF)](docs/presentation/RTC_계산기_발표자료.pdf)
+
+## 동작 영상
+
+<table>
+  <tr>
+    <th width="50%">Reset 동작</th>
+    <th width="50%">계산기 대기 동작</th>
+  </tr>
+  <tr>
+    <td><video src="https://github.com/user-attachments/assets/9201ae2a-b272-4af6-81cc-fa5492c17b1b" width="100%" controls muted></video></td>
+    <td><video src="https://github.com/user-attachments/assets/16aa15ed-f6f5-4f53-aef4-6619253aef0c" width="100%" controls muted></video></td>
+  </tr>
+  <tr>
+    <th width="50%">계산기 Shift 동작</th>
+    <th width="50%">전체 동작</th>
+  </tr>
+  <tr>
+    <td><video src="https://github.com/user-attachments/assets/3c961f86-75e2-441f-8e36-236fd8bb8af0" width="100%" controls muted></video></td>
+    <td><video src="https://github.com/user-attachments/assets/b943fc2d-21e4-4a6d-8d8f-e8051909b757" width="100%" controls muted></video></td>
+  </tr>
+</table>
 
 ---
 
@@ -65,7 +97,7 @@
 #### ⚙️ 제어 및 구조적 사양
 * **레지스터 선택 (RS 핀)**
   * RS = 0 : Instruction Register (화면 초기화, 입력 설정 등 명령용)
-  * RS = 1 : Data Register (화면에 문자를 직접 표출하기 위한 아스크 코드 저장)
+  * RS = 1 : Data Register (화면에 문자를 직접 표출하기 위한 아스키 코드 저장)
 * **내부 메모리 아키텍처**
   * **DDRAM (Display RAM):** 문자 코드 저장 영역. 1행은 0x00, 2행은 0x40 주소 할당
   * **CGROM & CGRAM:** 기본 폰트용 CGROM 및 사용자 커스텀 폰트 구현용 CGRAM
@@ -143,23 +175,7 @@ START ➡️ 0x68 (addr) + READ ➡️ ACK ➡️ 0x54 (second)
 
 ---
 
-## 5. 동작 영상
-
-[[Reset 동작]](https://github.com/user-attachments/assets/9201ae2a-b272-4af6-81cc-fa5492c17b1b)
-
-
-[[계산기 대기 동작]](https://github.com/user-attachments/assets/16aa15ed-f6f5-4f53-aef4-6619253aef0c)
-
-
-[[계산기 Shift 동작]](https://github.com/user-attachments/assets/3c961f86-75e2-441f-8e36-236fd8bb8af0)
-
-
-[[전체 동작]](https://github.com/user-attachments/assets/b943fc2d-21e4-4a6d-8d8f-e8051909b757)
-
-
----
-
-## 📝 6. 구현 후기
+## 📝 5. 구현 후기
 
 * **[LCD 하드웨어 시프트]** 명령어의 물리적 실행 시간(1.64ms) 제약을 고려하여 4비트 인터페이스의 타이밍 동기화를 정밀하게 제어함으로써, 긴 수식 입력 시 화면이 부드럽게 밀리는 하드웨어 스크롤 기능을 성공적으로 구현했습니다.
 * **[오버플로우 방지]** 정수 범위 한계를 극복하기 위해 문자열 변환 버퍼 함수로 제어하여 큰 자릿수도 깨짐없이 정상 계산되도록 완성했습니다.
